@@ -4,6 +4,7 @@ import {Maybe} from '@/types/maybe'
 import { LoginForm } from "@/components/Form/LoginForm"
 import Layout from "@/components/Layout/Layout"
 import { GetServerSideProps } from "next"
+import { authContext } from "@/middlewares/authContext"
 const styles = {
   label: 'block text-pink-500 text-sm font-bold pt-2 pb-1',
   field:
@@ -20,12 +21,22 @@ interface LoginPageProps {
 const LoginPage: React.FC<LoginPageProps> = ({}) => {
 
   return (
-    <Layout page="page" title="Login Form">
+    <Layout page="login" title="Login Form">
       <LoginForm styles={styles}/>
     </Layout>
   )
 }
 
+export const getServerSideProps: GetServerSideProps = authContext(
+  async (context) => {
+    const {accessToken} = context
+    return {
+      props: {
+        accessToken
+      }
+    }
+  }
+)
 
 export default LoginPage
 

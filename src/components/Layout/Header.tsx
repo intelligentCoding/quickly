@@ -8,7 +8,7 @@ interface HeaderProps {
 }
 export const Header: React.FC<HeaderProps> = ({ page, user }) => {
   const linkClass = "px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
-  const LoginNavItem: React.FC = () => {
+  const SignupNavItem: React.FC = () => {
     return (
       <li className="nav-item">
         <a
@@ -21,7 +21,7 @@ export const Header: React.FC<HeaderProps> = ({ page, user }) => {
     )
   }
 
-  const SignupNavItem: React.FC = () => {
+  const LoginNavItem: React.FC = () => {
     return (
       <li className="nav-item">
         <a
