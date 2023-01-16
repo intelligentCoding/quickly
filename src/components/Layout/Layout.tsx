@@ -9,7 +9,7 @@ export interface LayoutProps {
   header?: ReactNode
   title: string
   page?: string
-  user: Maybe<User>
+  user?: Maybe<User>
 }
 
 export const Layout: FunctionComponent<LayoutProps> = (props) => {
@@ -19,6 +19,7 @@ export const Layout: FunctionComponent<LayoutProps> = (props) => {
     header,
     title,
     page,
+    user
   } = props
 
   return (
@@ -29,7 +30,11 @@ export const Layout: FunctionComponent<LayoutProps> = (props) => {
         <meta name="Kashif Mahmood" content="Quikly Assignment" />
         {/* Other SEO should be here */}
     </Head>
-    {/* Header will be sent or we will show a common header (non-auth) */}
+    {typeof header !== 'undefined' ? (
+        header
+      ) : (
+        <Header page={page} user={user}/>
+      )}
             <div>{children}</div>
 
     </>
