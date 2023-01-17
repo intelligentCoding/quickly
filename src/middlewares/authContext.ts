@@ -5,15 +5,12 @@ import { GetServerSideProps } from "next";
 
 export const authContext = (gssp: MyGetServerSideProps): GetServerSideProps => {
   const fn: GetServerSideProps = async (context) => {
-    const accessToken = getAccessToken()
+    const {token: accessToken} = context.req.cookies || null
     if(accessToken) {
-      const routeToMainPage = {
+      return {
         redirect: {
-          redirect: {
-            permanent: false,
-            destination: MAIN_PAGE,
-          },
-          props: {},
+          permanent: false,
+          destination: '/profile'
         }
       }
     }

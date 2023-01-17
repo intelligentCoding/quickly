@@ -18,8 +18,8 @@ interface LoginPageProps {
   user: Maybe<User>
 }
 
-const LoginPage: React.FC<LoginPageProps> = ({}) => {
-
+const LoginPage: React.FC<LoginPageProps> = ({accessToken}) => {
+  console.log(accessToken)
   return (
     <Layout page="login" title="Login Form">
       <LoginForm styles={styles}/>
@@ -32,7 +32,7 @@ export const getServerSideProps: GetServerSideProps = authContext(
     const {accessToken} = context
     return {
       props: {
-        accessToken
+        accessToken: accessToken || null
       }
     }
   }

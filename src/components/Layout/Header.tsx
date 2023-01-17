@@ -1,6 +1,8 @@
 import { Maybe } from '@/types/maybe'
 import { User } from '@/types/user'
+import { useRouter } from 'next/router'
 import React from 'react'
+import { useCookies } from 'react-cookie'
 
 interface HeaderProps {
   page?: string
@@ -8,6 +10,8 @@ interface HeaderProps {
 }
 export const Header: React.FC<HeaderProps> = ({ page, user }) => {
   const linkClass = "px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
+  const [cookie, setCookie, removeCookie] = useCookies(['token']);
+  const router = useRouter()
   const SignupNavItem: React.FC = () => {
     return (
       <li className="nav-item">
@@ -61,12 +65,17 @@ export const Header: React.FC<HeaderProps> = ({ page, user }) => {
     } else {
       return (
         <div className={linkClass}>
-          {user.full_name}
+          {`Welcome `} {user.full_name}
+          <button className='bg-pink-700 text-white font-bold py-2 px-2 w-full rounded hover:bg-pink-500' onClick={onLogout}>Logout</button>
         </div>
       )
     }
 
 
+  }
+  const onLogout = () => {    
+    removeCookie('token')
+    router.push('/')
   }
   const [navbarOpen, setNavbarOpen] = React.useState(false);
   return (
