@@ -55,7 +55,9 @@ export const Header: React.FC<HeaderProps> = ({ page, user }) => {
     if (page === 'signup') {
       return (
         <>
-          Already have an account? <LoginNavItem />
+          <div className='items-center flex text-white'>
+            Already have an account? <LoginNavItem />
+          </div>
         </>
       )
     }
@@ -63,7 +65,10 @@ export const Header: React.FC<HeaderProps> = ({ page, user }) => {
     if (page === 'login') {
       return (
         <>
-          {`Dongt &apos; have an account? `}<SignupNavItem />
+          <div className='items-center flex text-white'>
+
+            Don&apos;t  have an account? <SignupNavItem />
+          </div>
         </>
       )
     }
@@ -78,22 +83,22 @@ export const Header: React.FC<HeaderProps> = ({ page, user }) => {
     } else {
       return (
         <>
-        <div className='items-center flex'>
-          {`Welcome `} {user.full_name}
-        </div>
-        <div className={linkClass}>
-        {page === 'notProfile' && (
-        <ProfileNavItem />
-        )}
-          <button className='bg-pink-700 text-white font-bold py-2 px-2 w-full rounded hover:bg-pink-500' onClick={onLogout}>Logout</button>
-        </div>
+          <div className='items-center flex'>
+            {`Welcome `} {user.full_name}
+          </div>
+          <div className={linkClass}>
+            {page === 'notProfile' && (
+              <ProfileNavItem />
+            )}
+            <button className='bg-pink-700 text-white font-bold py-2 px-2 w-full rounded hover:bg-pink-500' onClick={onLogout}>Logout</button>
+          </div>
         </>
       )
     }
 
 
   }
-  const onLogout = () => {    
+  const onLogout = () => {
     removeCookie('token')
     router.push('/')
   }

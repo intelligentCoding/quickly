@@ -10,7 +10,7 @@ const styles = {
   field:
     'bg-pink-100 text-pink-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none',
   button:
-    ' bg-pink-700 text-white font-bold py-2 px-4 w-full rounded hover:bg-pink-500',
+  ' bg-pink-700 disabled:opacity-50 text-white font-bold py-2 px-4 w-full rounded hover:bg-pink-500',
   errorMsg: 'text-red-500 text-sm',
 }
 interface LoginPageProps {
