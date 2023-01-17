@@ -27,13 +27,6 @@ interface LoadingContainerProps {
   placeholder?: React.ReactNode
 }
 
-/**
- * A simple component that wraps any React children with a spinner inside an overlay.
- *
- * For UX purpose, the overlay is debounced.
- * It will only start showing after 200ms when the loading is set to true.
- * So, the spinner won't blink for fast loading times.
- */
 export const LoadingContainer: React.FC<LoadingContainerProps> = ({
   children,
   loading,

@@ -5,6 +5,8 @@ import axios from 'axios';
 import { useRouter } from 'next/router';
 import { setAccessToken } from '@/store/accessToken';
 import { useCookies } from "react-cookie"
+import { LoadingContainer } from '@/components/LoadingContainer';
+import { usePageLoading } from '@/hooks/usePageLoading';
 
 interface LoginFormProps {
   styles: {
@@ -17,8 +19,9 @@ interface LoginFormProps {
 export const LoginForm: React.FC<LoginFormProps> = ({ styles }) => {
   const router = useRouter()
   const [cookie, setCookie] = useCookies(["token"])
-  const [loading, setloading] = useState(true);
+  const [loading, setloading] = useState(false);
   const [error, seterror] = useState("");
+  const pageLoading = usePageLoading()
   return (
     <>
       <Formik
@@ -29,6 +32,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({ styles }) => {
         validationSchema={loginSchema}
         onSubmit={async (values) => {
           try {
+            setloading(true)
             const response = await axios.post('https://api-dev.quicklyinc.com/auth/login', {
               email: values.email,
               password: values.password
@@ -57,6 +61,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({ styles }) => {
           const { errors, isSubmitting, values, dirty, isValid } = formik
           const submitDisabled = Object.keys(errors).length > 0 || !(dirty && isValid)//Need to also disable when making login call. 
           return (
+            <LoadingContainer loading={loading || pageLoading}>
             <div>
               {error && (
                 <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
@@ -89,6 +94,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({ styles }) => {
                 </div>
               </Form>
             </div>
+            </LoadingContainer>
           )
         }}
       </Formik>

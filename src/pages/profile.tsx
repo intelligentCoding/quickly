@@ -13,7 +13,6 @@ const capitalize = (name: string) => {
   return lowerCaseName.charAt(0).toUpperCase() + lowerCaseName.slice(1)
 }
 const ProfilePage: React.FC<ProfilePageProps> = ({ user, accessToken }) => {
-  console.log("accessToken", accessToken)
   return (
     <Layout user={user} title="Profile Page">
       <div className="flex">
