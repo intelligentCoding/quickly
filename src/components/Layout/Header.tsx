@@ -63,7 +63,7 @@ export const Header: React.FC<HeaderProps> = ({ page, user }) => {
     if (page === 'login') {
       return (
         <>
-          Dong't have an account? <SignupNavItem />
+          {`Dongt &apos; have an account? `}<SignupNavItem />
         </>
       )
     }
