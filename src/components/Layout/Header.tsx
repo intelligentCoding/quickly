@@ -9,7 +9,7 @@ interface HeaderProps {
   user?: Maybe<User>
 }
 export const Header: React.FC<HeaderProps> = ({ page, user }) => {
-  const linkClass = "px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
+  const linkClass = "px-4 py-2 flex text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
   const [cookie, setCookie, removeCookie] = useCookies(['token']);
   const router = useRouter()
   const SignupNavItem: React.FC = () => {
@@ -33,6 +33,18 @@ export const Header: React.FC<HeaderProps> = ({ page, user }) => {
           href="/login"
         >
           login
+        </a>
+      </li>
+    )
+  }
+  const ProfileNavItem: React.FC = () => {
+    return (
+      <li className="nav-item">
+        <a
+          className={linkClass}
+          href="/profile"
+        >
+          Profile
         </a>
       </li>
     )
@@ -64,10 +76,17 @@ export const Header: React.FC<HeaderProps> = ({ page, user }) => {
       )
     } else {
       return (
-        <div className={linkClass}>
+        <>
+        <div className='items-center flex'>
           {`Welcome `} {user.full_name}
+        </div>
+        <div className={linkClass}>
+        {page === 'notProfile' && (
+        <ProfileNavItem />
+        )}
           <button className='bg-pink-700 text-white font-bold py-2 px-2 w-full rounded hover:bg-pink-500' onClick={onLogout}>Logout</button>
         </div>
+        </>
       )
     }
 

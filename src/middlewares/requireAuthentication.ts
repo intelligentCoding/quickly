@@ -5,6 +5,7 @@ import { GetServerSideProps } from "next";
 
 export const requireAuthentication = (
   gssp: MyGetServerSideProps,
+  redirect: boolean
 ): GetServerSideProps => {
   const fn: GetServerSideProps = async (context) => {
     const routeToLoginProps = {
@@ -15,9 +16,13 @@ export const requireAuthentication = (
       props: {},
     }
     const {token: accessToken} = context.req.cookies
-    if(!accessToken || accessToken === null) {
-      return routeToLoginProps
-    }
+    if((!accessToken || accessToken === null)) {
+      if(redirect) {
+        return routeToLoginProps
+      } else {
+        return await gssp({...context, accessToken, user: undefined})
+      }
+    } 
     
     //getch user
       const response = await axios.get('https://api-dev.quicklyinc.com/auth/user', {

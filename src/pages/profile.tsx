@@ -13,6 +13,7 @@ const capitalize = (name: string) => {
   return lowerCaseName.charAt(0).toUpperCase() + lowerCaseName.slice(1)
 }
 const ProfilePage: React.FC<ProfilePageProps> = ({ user, accessToken }) => {
+  console.log(user)
   return (
     <Layout user={user} title="Profile Page">
       <div className="flex">
@@ -34,6 +35,6 @@ export const getServerSideProps: GetServerSideProps = requireAuthentication(
         user
       }
     }
-  }
+  }, true
 )
 export default ProfilePage
